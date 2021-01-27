@@ -1,0 +1,13 @@
+import { HttpHandler } from 'src/api';
+import { StatusCode } from 'src/core';
+export declare const setStatus: (status: StatusCode) => HttpHandler;
+export declare const success: HttpHandler;
+export declare const created: HttpHandler;
+export declare const accepted: HttpHandler;
+export declare const badRequest: HttpHandler;
+export declare const unauthorized: HttpHandler;
+export declare const forbidden: HttpHandler;
+export declare const notFount: HttpHandler;
+export declare const notAllowed: HttpHandler;
+export declare const internalServerError: HttpHandler;
+export declare const notImplemented: HttpHandler;
