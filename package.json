@@ -1,9 +1,9 @@
 {
   "name": "plando",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "",
   "main": "lib/index.js",
-  "exports": "lib/index.js",
+  "exports": "./lib/index.js",
   "type": "module",
   "scripts": {
     "build": "tsc"
