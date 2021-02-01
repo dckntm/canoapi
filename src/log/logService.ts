@@ -1,5 +1,5 @@
 import { Logger } from 'tslog';
-import { injectAppConfig } from 'config';
+import { injectAppConfig } from '../config';
 import { ILogConfig } from './logConfig';
 import { LogLevel } from './logLevel';
 

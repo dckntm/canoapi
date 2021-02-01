@@ -1,6 +1,6 @@
-import { StatusCode } from 'core';
-import { Exception } from 'exception';
-import { injectLogService } from 'log';
+import { StatusCode } from '../core';
+import { Exception } from '../exception';
+import { injectLogService } from '../log';
 import { Db, MongoClient } from 'mongodb';
 import { injectMongoConfig } from './injections';
 import { IMongoConfig } from './mongoConfig';

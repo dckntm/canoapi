@@ -1,7 +1,7 @@
-import { compose, HttpHandler, IHttpContext, sendJson, setStatus } from 'api';
-import { StatusCode } from 'core';
-import { Exception } from 'exception';
-import { injectLogService } from 'log';
+import { compose, HttpHandler, IHttpContext, sendJson, setStatus } from '../';
+import { StatusCode } from '../../core';
+import { Exception } from '../../exception';
+import { injectLogService } from '../../log';
 
 export const handleException: (e: any) => HttpHandler = (e: any) => async (
   context: IHttpContext,

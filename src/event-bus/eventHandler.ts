@@ -1,4 +1,4 @@
-import { IEvent } from 'core';
+import { IEvent } from '../core';
 
 export type EventHandler<TEvent extends IEvent<any, any>> = (
   event: TEvent,

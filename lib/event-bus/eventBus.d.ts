@@ -1,4 +1,4 @@
-import { IEvent } from 'core';
+import { IEvent } from '../core';
 import { EventHandler } from './eventHandler';
 export declare type Event = IEvent<any, any>;
 export declare class EventBus {

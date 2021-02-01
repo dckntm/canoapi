@@ -1,5 +1,5 @@
-import { HttpHandler, IHttpContext } from 'api';
-import { StatusCode } from 'core';
+import { HttpHandler, IHttpContext } from '../';
+import { StatusCode } from '../../core';
 
 // high-order HttpHandler general for other specific status code setters
 export const setStatus: (status: StatusCode) => HttpHandler = (

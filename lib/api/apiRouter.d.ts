@@ -1,4 +1,4 @@
-import { HttpMethod } from 'core';
+import { HttpMethod } from '../core';
 import { Router } from 'express';
 import { HttpHandler } from './httpHandler';
 interface IRoute {

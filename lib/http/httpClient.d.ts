@@ -1,4 +1,4 @@
-import { HttpMethod } from 'core';
+import { HttpMethod } from '../core';
 import { IHttpClientConfig } from './httpClientConfig';
 export declare class HttpClient {
     config: IHttpClientConfig;

@@ -1,4 +1,4 @@
-import { injectAppConfig } from 'config';
+import { injectAppConfig } from '../config';
 import { HttpClient } from './httpClient';
 import { IHttpClientConfig } from './httpClientConfig';
 

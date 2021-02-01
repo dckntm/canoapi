@@ -1,4 +1,4 @@
-import { HttpHandler, IHttpContext } from 'api';
+import { HttpHandler, IHttpContext } from '../';
 
 export const compose: (...handlers: HttpHandler[]) => HttpHandler = (
   ...handlers: HttpHandler[]

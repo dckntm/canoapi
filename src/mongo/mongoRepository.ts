@@ -1,6 +1,6 @@
 import { OptionalId, FilterQuery, Collection } from 'mongodb';
-import { IIdentifiable, StatusCode } from 'core';
-import { Exception } from 'exception';
+import { IIdentifiable, StatusCode } from '../core';
+import { Exception } from '../exception';
 import { MongoDatabase, ICollection, injectMongoDatabase } from '.';
 import { flattenObject } from './utils/flattenObject';
 

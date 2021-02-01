@@ -1,5 +1,5 @@
 import { FilterQuery } from 'mongodb';
-import { IIdentifiable } from 'core';
+import { IIdentifiable } from '../core';
 import { ICollection } from '.';
 export declare class MongoRepository<TEntity extends IIdentifiable<TKey>, TKey> {
     private readonly collection;

@@ -1,4 +1,4 @@
-import { StatusCode } from 'core';
+import { StatusCode } from '../core';
 import { ExceptionType } from './exceptionType';
 
 export class Exception {

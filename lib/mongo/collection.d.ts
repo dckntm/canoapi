@@ -1,4 +1,4 @@
-import { IIdentifiable } from 'core';
+import { IIdentifiable } from '../core';
 import { Collection } from 'mongodb';
 export interface ICollection<TEntity extends IIdentifiable<TKey>, TKey> {
     readonly name: string;

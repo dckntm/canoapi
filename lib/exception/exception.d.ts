@@ -1,4 +1,4 @@
-import { StatusCode } from 'core';
+import { StatusCode } from '../core';
 export declare class Exception {
     private type;
     status: StatusCode;

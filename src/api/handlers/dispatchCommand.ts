@@ -1,5 +1,5 @@
-import { DispatchSource, HttpHandler, IHttpContext } from 'api';
-import { Exception } from 'exception';
+import { DispatchSource, HttpHandler, IHttpContext } from '../';
+import { Exception } from '../../exception';
 
 export const dispatchCommand: <TCommand>(
   handler: (query: TCommand) => Promise<void> | void,

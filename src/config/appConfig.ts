@@ -1,5 +1,5 @@
 import * as fs from 'fs';
-import { Exception } from 'exception';
+import { Exception } from '../exception';
 
 interface IEnvironmentVariableCache {
   key: string;

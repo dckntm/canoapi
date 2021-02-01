@@ -1,2 +1,2 @@
-import { IHttpContext } from 'api';
+import { IHttpContext } from '../';
 export declare const end: (context: IHttpContext) => void;

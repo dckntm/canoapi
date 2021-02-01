@@ -1,4 +1,4 @@
-import { DispatchSource, HttpHandler } from 'api';
+import { DispatchSource, HttpHandler } from '../';
 export declare const DispatchQuery: <TQuery, TResult>(handler: (query: TQuery) => Promise<TResult> | TResult, ...source: DispatchSource[]) => HttpHandler;
 export declare const DispatchQueryFromBody: <TQuery, TResult>(handler: (query: TQuery) => Promise<TResult> | TResult) => HttpHandler;
 export declare const DispatchQueryFromQuery: <TQuery, TResult>(handler: (query: TQuery) => Promise<TResult> | TResult) => HttpHandler;

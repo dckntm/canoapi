@@ -1,6 +1,6 @@
-import { HttpMethod } from 'core';
+import { HttpMethod } from '../core';
 import { Router, Request, Response } from 'express';
-import { LogService } from 'log';
+import { LogService } from '../log';
 import { compose, end, handleException } from './handlers';
 import { HttpContext } from './httpContext';
 import { HttpHandler } from './httpHandler';

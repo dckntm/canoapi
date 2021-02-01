@@ -1,5 +1,5 @@
-import { IHttpContext } from 'api';
-import { Exception } from 'exception';
+import { IHttpContext } from '../';
+import { Exception } from '../../exception';
 import * as Yup from 'yup';
 
 export const Validate = (schema: Yup.AnyObjectSchema) => async (

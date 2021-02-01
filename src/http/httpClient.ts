@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import Axios from 'axios';
-import { HttpMethod, StatusCode } from 'core';
-import { Exception } from 'exception';
-import { injectLogService } from 'log';
+import { HttpMethod, StatusCode } from '../core';
+import { Exception } from '../exception';
+import { injectLogService } from '../log';
 import { IHttpClientConfig } from './httpClientConfig';
 
 export class HttpClient {

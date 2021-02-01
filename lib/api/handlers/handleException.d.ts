@@ -1,2 +1,2 @@
-import { HttpHandler } from 'api';
+import { HttpHandler } from '../';
 export declare const handleException: (e: any) => HttpHandler;

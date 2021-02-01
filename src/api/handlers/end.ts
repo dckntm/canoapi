@@ -1,5 +1,5 @@
-import { IHttpContext } from 'api';
-import { injectLogService } from 'log';
+import { IHttpContext } from '../';
+import { injectLogService } from '../../log';
 
 export const end = (context: IHttpContext): void => {
   const log = injectLogService();

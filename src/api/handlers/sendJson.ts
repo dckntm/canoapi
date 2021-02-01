@@ -1,5 +1,5 @@
-import { HttpHandler, IHttpContext } from 'api';
-import { Exception } from 'exception';
+import { HttpHandler, IHttpContext } from '../';
+import { Exception } from '../../exception';
 
 export const sendJson: <T>(body: T) => HttpHandler = <T>(body: T) => (
   context: IHttpContext,

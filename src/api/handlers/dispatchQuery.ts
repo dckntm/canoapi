@@ -5,8 +5,8 @@ import {
   IHttpContext,
   sendJson,
   success,
-} from 'api';
-import { Exception } from 'exception';
+} from '../';
+import { Exception } from '../../exception';
 
 export const DispatchQuery: <TQuery, TResult>(
   handler: (query: TQuery) => Promise<TResult> | TResult,

@@ -1,4 +1,4 @@
-import { IIdentifiable } from 'core';
+import { IIdentifiable } from '../core';
 import { ICollection } from './collection';
 import { IMongoConfig } from './mongoConfig';
 import { MongoDatabase } from './mongoDatabase';

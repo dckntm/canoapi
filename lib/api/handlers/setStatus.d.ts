@@ -1,5 +1,5 @@
-import { HttpHandler } from 'api';
-import { StatusCode } from 'core';
+import { HttpHandler } from '../';
+import { StatusCode } from '../../core';
 export declare const setStatus: (status: StatusCode) => HttpHandler;
 export declare const success: HttpHandler;
 export declare const created: HttpHandler;
