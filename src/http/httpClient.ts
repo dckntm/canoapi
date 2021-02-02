@@ -27,8 +27,8 @@ export class HttpClient {
 
       const response = await Axios.request<TResult>({
         url: `${this.config.base}${url}`,
-        method: method,
-        data: data,
+        method,
+        data,
         headers: {
           ...this.config.defaultHeaders,
           ...headers,

@@ -40,7 +40,7 @@ export const DispatchQuery: <TQuery, TResult>(
         body: context.request.body,
         params: context.request.params,
         query: context.request.query,
-        data: data,
+        data,
       });
 
   // may throw error which will be handled on the top-most level
@@ -78,7 +78,7 @@ export const DispatchQueryFormValue: <TQuery, TResult>(
     throw Exception.api()
       .withMessage('Value for query dispatch is invalid (null or undefined)')
       .from('DispatchQueryFromValue')
-      .withMeta({ value: value });
+      .withMeta({ value });
 
   const result = await handler(value);
 

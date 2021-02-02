@@ -31,11 +31,11 @@ function flattenNestedProperty(
   result: any,
   options: FlattenObjectOptions,
 ): void {
-  const flattenValue = (value: any, propName: string, result: any) => {
+  const flattenValue = (value: any, propName: string, resultParam: any) => {
     if (value && typeof value === 'object') {
-      flattenNestedProperty(propName, value, result, options);
+      flattenNestedProperty(propName, value, resultParam, options);
     } else {
-      result[propName] = value;
+      resultParam[propName] = value;
     }
   };
 

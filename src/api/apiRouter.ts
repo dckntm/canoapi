@@ -59,9 +59,9 @@ export class ApiRouter {
 
   public get(path: string, handler: HttpHandler): this {
     this.routes.push({
-      path: path,
+      path,
       method: HttpMethod.GET,
-      handler: handler,
+      handler,
     });
 
     return this;
@@ -69,9 +69,9 @@ export class ApiRouter {
 
   public post(path: string, handler: HttpHandler): this {
     this.routes.push({
-      path: path,
+      path,
       method: HttpMethod.POST,
-      handler: handler,
+      handler,
     });
 
     return this;
@@ -79,9 +79,9 @@ export class ApiRouter {
 
   public put(path: string, handler: HttpHandler): this {
     this.routes.push({
-      path: path,
+      path,
       method: HttpMethod.PUT,
-      handler: handler,
+      handler,
     });
 
     return this;
@@ -89,9 +89,9 @@ export class ApiRouter {
 
   public delete(path: string, handler: HttpHandler): this {
     this.routes.push({
-      path: path,
+      path,
       method: HttpMethod.DELETE,
-      handler: handler,
+      handler,
     });
 
     return this;

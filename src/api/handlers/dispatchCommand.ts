@@ -33,7 +33,7 @@ export const dispatchCommand: <TCommand>(
         body: context.request.body,
         params: context.request.params,
         query: context.request.query,
-        data: data,
+        data,
       });
 
   // may throw error which will be handled on the top-most level
@@ -69,7 +69,7 @@ export const dispatchCommandFormValue: <TCommand>(
     throw Exception.api()
       .withMessage('Value for query dispatch is invalid (null or undefined)')
       .from('DispatchQueryFromValue')
-      .withMeta({ value: value });
+      .withMeta({ value });
 
   await handler(value);
 };
