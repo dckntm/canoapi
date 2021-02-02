@@ -12,11 +12,12 @@ interface IRoute {
   handler: HttpHandler;
 }
 
-export class ApiRouter {
+export class ApiRouter<TMeta = any> {
   constructor(
     private base: string,
     private defaultHandlers: HttpHandler[] = [],
     private routes: IRoute[] = [],
+    private defaultMeta?: TMeta,
   ) {}
 
   public apply(): Router {
@@ -31,7 +32,11 @@ export class ApiRouter {
       const handler = async (request: Request, response: Response) => {
         log.info(`Calling ${route.method} ${path}`);
 
-        const context = new HttpContext(request, response, {});
+        const context = new HttpContext<TMeta>(
+          request,
+          response,
+          this.defaultMeta,
+        );
 
         try {
           await compose(...this.defaultHandlers, route.handler, end)(context);

@@ -1,13 +1,13 @@
 import { IIdentifiable } from '../core';
 import { injectAppConfig } from '../config';
 import { ICollection } from './collection';
-import { IMongoConfig } from './mongoConfig';
+import { DefaultMongoConfig, IMongoConfig } from './mongoConfig';
 import { MongoDatabase } from './mongoDatabase';
 import { MongoRepository } from './mongoRepository';
 
 export const injectMongoConfig = (): IMongoConfig => {
   const appConfig = injectAppConfig();
-  const config: IMongoConfig = {};
+  const config = DefaultMongoConfig;
   appConfig.bind('mongo', config);
 
   return config;

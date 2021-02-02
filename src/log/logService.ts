@@ -1,13 +1,13 @@
 import { Logger } from 'tslog';
 import { injectAppConfig } from '../config';
-import { ILogConfig } from './logConfig';
+import { DefaultLogConfig } from './logConfig';
 import { LogLevel } from './logLevel';
 
 // TODO: think over scoping log service and services generally
 // singletons are not always good approach
 
 export class LogService {
-  private config: ILogConfig = {};
+  private config = DefaultLogConfig;
   private tslog!: Logger;
   private static instance: LogService;
 
