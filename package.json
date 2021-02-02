@@ -1,6 +1,6 @@
 {
   "name": "canoapi",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Functional library for developing APIs",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
