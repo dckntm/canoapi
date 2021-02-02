@@ -30,8 +30,6 @@ export class EventBus {
   }
 
   public async dispatch(event: Event): Promise<void> {
-    for (const handle of this.handlers.values()) {
-      await handle(event);
-    }
+    this.handlers.forEach(async (x) => await x(event));
   }
 }
