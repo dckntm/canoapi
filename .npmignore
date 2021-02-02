@@ -1,4 +1,4 @@
-*/**
-
-!lib/**/*
-!package.json
+src
+tsconfig.json
+tslint.json
+.prettierrc

@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "target": "es6",
+    "module": "commonjs",
     "allowJs": false,
     "strict": true,
     "allowSyntheticDefaultImports": true,
@@ -11,9 +12,8 @@
     "resolveJsonModule": true,
     "downlevelIteration": true,
     "declaration": true,
-    "outDir": "./lib",
-    "baseUrl": "src"
+    "outDir": "./lib"
   },
-  "include": ["**/*.ts"],
+  "include": ["src"],
   "exclude": ["node_modules"]
 }

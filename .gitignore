@@ -53,3 +53,6 @@ Thumbs.db
 
 .env.local
 
+# package files
+
+/lib

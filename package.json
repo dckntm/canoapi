@@ -1,12 +1,14 @@
 {
-  "name": "plando",
-  "version": "0.0.3",
-  "description": "",
+  "name": "canoapi",
+  "version": "0.0.1",
+  "description": "Functional library for developing APIs",
   "main": "lib/index.js",
-  "exports": "./lib/index.js",
-  "type": "module",
+  "types": "lib/index.d.ts",
+  "files": [
+    "lib/**/*"
+  ],
   "scripts": {
-    "build": "rm -rf lib && tsc"
+    "build": "tsc"
   },
   "repository": {
     "type": "git",
