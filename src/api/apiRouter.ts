@@ -30,7 +30,7 @@ export class ApiRouter<TMeta = any> {
       const path = `${this.base}${route.path}`;
 
       const handler = async (request: Request, response: Response) => {
-        log.info(`Calling ${route.method} ${path}`);
+        log.info(`Calling ${request.method} ${path}`);
 
         const context = new HttpContext<TMeta>(
           request,
