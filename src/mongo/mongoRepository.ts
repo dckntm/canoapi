@@ -47,6 +47,7 @@ export class MongoRepository<TEntity extends IIdentifiable<TKey>, TKey> {
       return document;
     }
 
+    // TODO : get rid of this exception
     throw Exception.internal()
       .withMessage('Failed to get entity')
       .withStatusCode(StatusCode.INTERNAL_SERVER_ERROR)

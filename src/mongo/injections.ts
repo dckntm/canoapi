@@ -8,6 +8,7 @@ import { MongoRepository } from './mongoRepository';
 export const injectMongoConfig = (): IMongoConfig => {
   const appConfig = injectAppConfig();
   const config = DefaultMongoConfig;
+  
   appConfig.bind('mongo', config);
 
   return config;

@@ -6,7 +6,7 @@ import { injectLogService } from '../log';
 import { IHttpClientConfig } from './httpClientConfig';
 
 export class HttpClient {
-  public config: IHttpClientConfig = {};
+  public config!: IHttpClientConfig;
 
   public async request<TResult = unknown>(
     url: string,

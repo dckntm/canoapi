@@ -14,3 +14,11 @@ Plando provides set of tools for bootstrapping your application. About each subl
 * HTTP
 * Log
 * Mongo
+
+## Contribution
+
+* Name branches after issues like `issues/<number>`
+* Start commits with `issues/<number>` for binding commits and issues
+* Provide documentation on the way
+* Push at `master` only from `develop` branch
+* Push issue branches to `develop` branch  
