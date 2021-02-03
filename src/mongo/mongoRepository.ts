@@ -1,15 +1,15 @@
-import { OptionalId, FilterQuery, Collection } from 'mongodb';
+import { OptionalId, FilterQuery, Collection, Db } from 'mongodb';
 import { IIdentifiable, StatusCode } from '../core';
 import { Exception } from '../exception';
-import { MongoDatabase, ICollection, injectMongoDatabase } from '.';
+import { MongoConnection, ICollection } from '.';
 import { flattenObject } from './utils/flattenObject';
 
 // TODO: implement from IRepository
 export class MongoRepository<TEntity extends IIdentifiable<TKey>, TKey> {
-  private readonly mongoDatabase: MongoDatabase;
+  private readonly database: Db;
 
   public constructor(private readonly collection: ICollection<TEntity, TKey>) {
-    this.mongoDatabase = injectMongoDatabase();
+    this.database = MongoConnection.getDatabase();
   }
 
   public async create(
@@ -95,9 +95,7 @@ export class MongoRepository<TEntity extends IIdentifiable<TKey>, TKey> {
   }
 
   private getCollection(): Collection<TEntity> {
-    const db = this.mongoDatabase.Database;
-
-    return db.collection(this.collection.name);
+    return this.database.collection(this.collection.name);
   }
 
   private async GetNextId(): Promise<number> {
