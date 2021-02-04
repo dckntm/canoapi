@@ -1,13 +1,13 @@
 import { Logger } from 'tslog';
-import { injectAppConfig } from '../config';
-import { DefaultLogConfig } from './logConfig';
+import { injectLogConfig } from './injections';
+import { ILogConfig } from './logConfig';
 import { LogLevel } from './logLevel';
 
 // TODO: think over scoping log service and services generally
 // singletons are not always good approach
 
 export class LogService {
-  private config = DefaultLogConfig;
+  private config!: ILogConfig;
   private tslog!: Logger;
   private static instance: LogService;
 
@@ -15,7 +15,7 @@ export class LogService {
   // support mail notification and event bus log pushes
   constructor() {
     if (!LogService.instance) {
-      injectAppConfig().bind('log', this.config);
+      this.config = injectLogConfig();
 
       this.tslog = new Logger({
         displayFunctionName: false,
