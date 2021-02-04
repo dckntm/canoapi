@@ -1,5 +1,5 @@
 import { IIdentifiable } from '../core';
-import { Collection } from 'mongodb';
+import { Collection, ObjectId } from 'mongodb';
 
 export interface ICollection<TEntity extends IIdentifiable<TKey>, TKey> {
   readonly name: string;
@@ -8,3 +8,5 @@ export interface ICollection<TEntity extends IIdentifiable<TKey>, TKey> {
 
   getNextId(collection: Collection<TEntity>): TKey | Promise<TKey>;
 }
+
+
