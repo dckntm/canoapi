@@ -19,7 +19,7 @@ export class MongoConnection {
 
       this.database = config.database;
 
-      log.info('Connecting...');
+      log.info('Connecting to Mongo...');
 
       MongoConnection.client = await MongoClient.connect(
         config.connectionString,
@@ -29,7 +29,7 @@ export class MongoConnection {
         },
       );
 
-      log.info(`Connected to ${config.connectionString}`);
+      log.info(`Connected to MongoDB on ${config.connectionString}`);
     }
   }
 
@@ -43,5 +43,3 @@ export class MongoConnection {
     return Boolean(MongoConnection.client);
   }
 }
-
-MongoConnection.init();
