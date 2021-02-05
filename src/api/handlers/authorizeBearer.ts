@@ -4,13 +4,13 @@ import { injectJWTConfig } from '../../auth/injections';
 import { Exception } from '../../exception';
 import { StatusCode } from '../../core';
 
-export const validateJWT = (context: IHttpContext) => {
+export const authorizeBearer = (context: IHttpContext) => {
    const jwtConfig = injectJWTConfig();
    const headers = context.request.headers['authorization'];
    const token = headers?.split('')[1];
    if (token != null) {
       try {
-         const payload = jwt.verify(token, jwtConfig.secret_key);
+         const payload = jwt.verify(token, jwtConfig.secretKey, { ignoreExpiration: !jwtConfig.validateLifetime, issuer: jwtConfig.validIssuer });
          context.meta = payload;
       }
       catch (e) {
@@ -30,17 +30,3 @@ export const validateJWT = (context: IHttpContext) => {
    }
 }
 
-export const createJWT = (context: IHttpContext) => {
-   const jwtConfig = injectJWTConfig();
-   try {
-      const token = jwt.sign(context.request.body, jwtConfig.secret_key, { expiresIn: jwtConfig.expires_In });
-      context.meta = token; //no idea where else to save
-   }
-   catch (e) {
-      throw Exception.api()
-         .withMessage('Cannot sign token')
-         .from('validateJWT')
-         .withMeta(e);
-
-   }
-}

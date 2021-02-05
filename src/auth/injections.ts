@@ -1,5 +1,5 @@
 import { injectAppConfig } from '../config'
-import { DefaultJWTConfig } from './jwt'
+import { DefaultJWTConfig } from './jwtConfig'
 
 export const injectJWTConfig = () => {
     const config = injectAppConfig();
