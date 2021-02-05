@@ -5,5 +5,5 @@ export const injectJWTConfig = () => {
     const config = injectAppConfig();
     const jwtConfig = DefaultJWTConfig;
     config.bind('jwt', jwtConfig);
-    return config;
+    return jwtConfig;
 }

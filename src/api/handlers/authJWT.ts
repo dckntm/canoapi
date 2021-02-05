@@ -1,18 +1,16 @@
 import { IHttpContext } from '..';
 import * as jwt from 'jsonwebtoken';
 import { injectJWTConfig } from '../../auth/injections';
-import { DefaultJWTConfig } from '../../auth/jwt';
 import { Exception } from '../../exception';
 import { StatusCode } from '../../core';
 
-
 export const validateJWT = (context: IHttpContext) => {
-   const secret = DefaultJWTConfig.secret_key;
+   const jwtConfig = injectJWTConfig();
    const headers = context.request.headers['authorization'];
    const token = headers?.split('')[1];
    if (token != null) {
       try {
-         const payload = jwt.verify(token, secret);
+         const payload = jwt.verify(token, jwtConfig.secret_key);
          context.meta = payload;
       }
       catch (e) {
@@ -33,10 +31,9 @@ export const validateJWT = (context: IHttpContext) => {
 }
 
 export const createJWT = (context: IHttpContext) => {
-   const secret = DefaultJWTConfig.secret_key;
-   const expire = DefaultJWTConfig.expires_In;
+   const jwtConfig = injectJWTConfig();
    try {
-      const token = jwt.sign(context.request.body, secret, { expiresIn: expire });
+      const token = jwt.sign(context.request.body, jwtConfig.secret_key, { expiresIn: jwtConfig.expires_In });
       context.meta = token; //no idea where else to save
    }
    catch (e) {
