@@ -1,5 +1,6 @@
 import { injectAppConfig } from '../config'
 import { DefaultJWTConfig } from './jwtConfig'
+import { jwtService } from './jwtService';
 
 export const injectJWTConfig = () => {
     const config = injectAppConfig();
@@ -7,3 +8,5 @@ export const injectJWTConfig = () => {
     config.bind('jwt', jwtConfig);
     return jwtConfig;
 }
+
+export const injectJWTService = (): jwtService => new jwtService();
