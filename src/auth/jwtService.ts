@@ -3,7 +3,7 @@ import { Exception } from '../exception';
 import { injectJWTConfig } from './injections';
 import { IJWTConfig } from './jwtConfig';
 
-export class jwtService {
+export class JWTService {
     private jwtConfig: IJWTConfig;
 
     public constructor() {
@@ -12,11 +12,7 @@ export class jwtService {
 
     public createJWT = (payload: any) => {
         try {
-            const token = jwt.sign(payload, this.jwtConfig.secretKey, { expiresIn: this.jwtConfig.expiresIn, issuer: this.jwtConfig.issuer })
-            return {
-                new_token: token,
-                expires: this.jwtConfig.expiresIn
-            };
+            return jwt.sign(payload, this.jwtConfig.secretKey, { expiresIn: this.jwtConfig.expiresIn, issuer: this.jwtConfig.issuer })
         }
         catch (e) {
             throw Exception.api()
