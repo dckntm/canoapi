@@ -1,6 +1,6 @@
 import { IHttpContext } from '..';
 import * as jwt from 'jsonwebtoken';
-import { injectJWTConfig } from '../../auth/injections';
+import { injectJWTConfig } from '../../jwt/injections';
 import { Exception } from '../../exception';
 import { StatusCode } from '../../core';
 
