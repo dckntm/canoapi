@@ -56,9 +56,13 @@ Sets a status code of the response provided as a parameter. There is also a set 
 
 Range of available status codes is actually wider.
 
+#### `authorizeBearer(context: IHttpContext)`
+
+Check authorization by validate token - if token is valid put its payload into meta-data of context. Otherwise throws an `Exception` which will be automatically handled and sent as a response.
+
 #### `sendJson(body: any)`
 
-Writes to response body passed object and sends request. This is very important as when you call `SendJson` handler you actually finish the request, so for now you should remember when you finally cal it.  
+Writes to response body passed object and sends request. This is very important as when you call `SendJson` handler you actually finish the request, so for now you should remember when you finally call it.  
 
 #### `validate(schema: Yup.AnyObjectSchema)`
 
