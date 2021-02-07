@@ -7,3 +7,4 @@ export * from './http';
 export * from './log';
 export * from './mongo';
 export * from './server';
+export * from './redis';

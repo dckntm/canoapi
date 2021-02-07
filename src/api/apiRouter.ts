@@ -4,8 +4,8 @@ import { LogService } from '../log';
 import { compose, end, handleException } from './handlers';
 import { HttpContext } from './httpContext';
 import { HttpHandler } from './httpHandler';
+import { formatRoutePath } from './utils/formatRoutePath';
 
-// TODO: add route parsing for getting rid of accidental '//'
 interface IRoute {
   path: string;
   method: HttpMethod;
@@ -18,19 +18,21 @@ export class ApiRouter<TMeta = any> {
     private defaultHandlers: HttpHandler[] = [],
     private routes: IRoute[] = [],
     private defaultMeta?: TMeta,
-  ) {}
+  ) {
+    this.base = formatRoutePath(base);
+  }
 
   public apply(): Router {
     const log = LogService.getInstance();
     const router = Router();
 
-    log.info(`Applying router: ${this.constructor.name}`);
+    log.info(`ROUTER: ${this.base}`);
 
     for (const route of this.routes) {
-      const path = `${this.base}${route.path}`;
+      const path = `/${this.base}/${formatRoutePath(route.path)}`;
 
       const handler = async (request: Request, response: Response) => {
-        log.info(`Calling ${route.method} ${path}`);
+        log.info(`Calling ${request.method} ${path}`);
 
         const context = new HttpContext<TMeta>(
           request,
@@ -56,7 +58,9 @@ export class ApiRouter<TMeta = any> {
           router.delete(path, handler);
       }
 
-      log.info(`Add route: ${route.method} ${path}`);
+      log.info(
+        `------- ${route.method.toString().padStart(this.base.length)} ${path}`,
+      );
     }
 
     return router;

@@ -1,26 +1,22 @@
-import { OptionalId, FilterQuery, Collection } from 'mongodb';
+import { OptionalId, FilterQuery, Collection, Db } from 'mongodb';
 import { IIdentifiable, StatusCode } from '../core';
 import { Exception } from '../exception';
-import { MongoDatabase, ICollection, injectMongoDatabase } from '.';
+import { MongoConnection, ICollection } from '.';
 import { flattenObject } from './utils/flattenObject';
+import { QueryOptions } from './queryOptions';
 
-// TODO: implement from IRepository
 export class MongoRepository<TEntity extends IIdentifiable<TKey>, TKey> {
-  private readonly mongoDatabase: MongoDatabase;
+  private readonly database: Db;
 
   public constructor(private readonly collection: ICollection<TEntity, TKey>) {
-    this.mongoDatabase = injectMongoDatabase();
+    this.database = MongoConnection.getDatabase();
   }
 
-  public async create(
-    entity: Partial<TEntity>,
-    externalId?: TKey,
-  ): Promise<TKey> {
+  public async create(entity: TEntity): Promise<TKey> {
     const collection = this.getCollection();
     const defaultValues = await this.collection.getDefault();
-    const id = externalId ?? (await this.collection.getNextId(collection));
+    const id = entity._id ?? (await this.collection.getNextId(collection));
 
-    // TODO : some id handling needed
     const data = {
       _id: id,
       ...defaultValues,
@@ -39,27 +35,22 @@ export class MongoRepository<TEntity extends IIdentifiable<TKey>, TKey> {
     return id;
   }
 
-  public async getOne(filter: FilterQuery<TEntity>): Promise<TEntity> {
+  public async getOne(filter: FilterQuery<TEntity>): Promise<TEntity | null> {
     const collection = this.getCollection();
-    const document = await collection.findOne(filter);
-
-    if (document) {
-      return document;
-    }
-
-    // TODO : get rid of this exception
-    throw Exception.internal()
-      .withMessage('Failed to get entity')
-      .withStatusCode(StatusCode.INTERNAL_SERVER_ERROR)
-      .withMeta({ filter })
-      .from('MongoRepository');
+    return await collection.findOne(filter);
   }
 
-  // TODO: add querying
-  public async getMany(filter: FilterQuery<TEntity>): Promise<TEntity[]> {
+  public async getMany(
+    filter: FilterQuery<TEntity>,
+    options?: QueryOptions,
+  ): Promise<TEntity[]> {
     const collection = this.getCollection();
 
-    const query = await collection.find(filter);
+    const query = await collection.find(filter, {
+      limit: options?.limit,
+      sort: options?.sort,
+      skip: options?.skip,
+    });
 
     const documents = await query.toArray();
 
@@ -95,12 +86,6 @@ export class MongoRepository<TEntity extends IIdentifiable<TKey>, TKey> {
   }
 
   private getCollection(): Collection<TEntity> {
-    const db = this.mongoDatabase.Database;
-
-    return db.collection(this.collection.name);
-  }
-
-  private async GetNextId(): Promise<number> {
-    return (await this.getCollection().countDocuments({})) + 1;
+    return this.database.collection(this.collection.name);
   }
 }
