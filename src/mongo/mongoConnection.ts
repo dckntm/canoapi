@@ -1,6 +1,6 @@
 import { injectLogService } from '../log';
 import { Db, MongoClient } from 'mongodb';
-import { injectMongoConfig } from './injections';
+import { DefaultMongoConfig, injectAppConfig } from '..';
 
 export class MongoConnection {
   private static database: string;
@@ -15,7 +15,10 @@ export class MongoConnection {
   public static async init(): Promise<void> {
     if (!this.client) {
       const log = injectLogService();
-      const config = injectMongoConfig();
+      const appConfig = injectAppConfig();
+      const config = { ...DefaultMongoConfig };
+
+      appConfig.bind('mongo', config);
 
       this.database = config.database;
 
