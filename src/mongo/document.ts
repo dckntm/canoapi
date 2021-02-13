@@ -10,4 +10,3 @@ export type IDocument<TEntity extends IEntity<TKey>, TKey> = Omit<
 
 export type IDefaultDocument<TEntity> = IDocument<TEntity, ObjectId>;
 export type IIndexedDocument<TEntity> = IDocument<TEntity, number>;
-

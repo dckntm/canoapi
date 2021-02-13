@@ -1,4 +1,4 @@
-import { OptionalId, FilterQuery, Collection, Db } from 'mongodb';
+import { OptionalId, FilterQuery, Collection } from 'mongodb';
 import { StatusCode } from '../core';
 import { Exception } from '../exception';
 import { MongoConnection, IDocument } from '.';
@@ -7,7 +7,6 @@ import { QueryOptions } from './queryOptions';
 import { IEntity } from '../core/entity';
 import { toDocument } from './utils/toDocument';
 import { toEntity } from './utils/toEntity';
-import { injectLogService } from '../log';
 
 export abstract class MongoRepository<TEntity extends IEntity<TKey>, TKey> {
   protected readonly collection: Collection<IDocument<TEntity, TKey>>;
