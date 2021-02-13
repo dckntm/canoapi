@@ -7,7 +7,7 @@ export const injectHttpClientConfig = (
 ): IHttpClientConfig => {
   const appConfig = injectAppConfig();
   const config = DefaultHttpClientConfig;
-  
+
   appConfig.bind(clientName ?? 'http', config);
 
   return config;

@@ -1,13 +1,13 @@
 import * as jwt from 'jsonwebtoken';
 import { Exception } from '../exception';
-import { injectJWTConfig } from './injections';
-import { IJWTConfig } from './jwtConfig';
+import { injectJwtConfig } from './injections';
+import { IJwtConfig } from './jwtConfig';
 
-export class JWTService {
-  private jwtConfig: IJWTConfig;
+export class JwtService {
+  private jwtConfig: IJwtConfig;
 
   public constructor() {
-    this.jwtConfig = injectJWTConfig();
+    this.jwtConfig = injectJwtConfig();
   }
 
   public createJWT = (payload: any) => {

@@ -43,6 +43,7 @@ export class ApiRouter<TMeta = any> {
         try {
           await compose(...this.defaultHandlers, route.handler, end)(context);
         } catch (e) {
+          log.info('Error!!!', e);
           await handleException(e)(context);
         }
       };
@@ -59,7 +60,7 @@ export class ApiRouter<TMeta = any> {
       }
 
       log.info(
-        `------- ${route.method.toString().padStart(this.base.length)} ${path}`,
+        `------- ${route.method.toString().padEnd(this.base.length)} ${path}`,
       );
     }
 

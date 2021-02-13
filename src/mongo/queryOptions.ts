@@ -1,5 +1,3 @@
-import { SortOptionObject } from 'mongodb';
-
 export class QueryOptions {
   limit?: number;
   sort?: [string, number][];
