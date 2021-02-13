@@ -1,24 +1,29 @@
 import { OptionalId, FilterQuery, Collection, Db } from 'mongodb';
 import { StatusCode } from '../core';
 import { Exception } from '../exception';
-import { MongoConnection, ICollection, IDocument } from '.';
+import { MongoConnection, IDocument } from '.';
 import { flattenObject } from './utils/flattenObject';
 import { QueryOptions } from './queryOptions';
 import { IEntity } from '../core/entity';
 import { toDocument } from './utils/toDocument';
 import { toEntity } from './utils/toEntity';
+import { injectLogService } from '../log';
 
-export class MongoRepository<TEntity extends IEntity<TKey>, TKey> {
-  private readonly database: Db;
+export abstract class MongoRepository<TEntity extends IEntity<TKey>, TKey> {
+  protected readonly collection: Collection<IDocument<TEntity, TKey>>;
 
-  public constructor(private readonly collection: ICollection<TEntity, TKey>) {
-    this.database = MongoConnection.getDatabase();
+  public constructor(
+    // private readonly collection: ICollection<TEntity, TKey>,
+    protected readonly name: string,
+    protected readonly nextId: (collection: Collection) => TKey | Promise<TKey>,
+    protected readonly getDefault: () => Partial<TEntity> = () => ({}),
+  ) {
+    this.collection = MongoConnection.getDatabase().collection(name);
   }
 
   public async create(entity: TEntity): Promise<TKey> {
-    const collection = this.getCollection();
-    const defaultValues = await this.collection.getDefault();
-    const id = entity.id ?? (await this.collection.getNextId(collection));
+    const defaultValues = await this.getDefault();
+    const id = entity.id ?? (await this.nextId(this.collection));
 
     const data = toDocument({
       ...defaultValues,
@@ -26,7 +31,7 @@ export class MongoRepository<TEntity extends IEntity<TKey>, TKey> {
       id,
     }) as OptionalId<IDocument<TEntity, TKey>>;
 
-    const operation = await collection.insertOne(data);
+    const operation = await this.collection.insertOne(data);
 
     if (!operation.result.ok)
       throw Exception.internal()
@@ -39,8 +44,6 @@ export class MongoRepository<TEntity extends IEntity<TKey>, TKey> {
   }
 
   public async getOne(filter: FilterQuery<TEntity>): Promise<TEntity | null> {
-    const collection = this.getCollection();
-
     let documentFilter = {};
 
     if (filter.id) {
@@ -54,7 +57,7 @@ export class MongoRepository<TEntity extends IEntity<TKey>, TKey> {
       documentFilter = filter;
     }
 
-    const document = await collection.findOne(documentFilter);
+    const document = await this.collection.findOne(documentFilter);
 
     if (document) return toEntity(document);
 
@@ -65,8 +68,6 @@ export class MongoRepository<TEntity extends IEntity<TKey>, TKey> {
     filter: FilterQuery<TEntity>,
     options?: QueryOptions,
   ): Promise<TEntity[]> {
-    const collection = this.getCollection();
-
     let documentFilter = {};
 
     if (filter.id) {
@@ -80,7 +81,7 @@ export class MongoRepository<TEntity extends IEntity<TKey>, TKey> {
       documentFilter = filter;
     }
 
-    const query = await collection.find(documentFilter, {
+    const query = await this.collection.find(documentFilter, {
       limit: options?.limit,
       sort: options?.sort,
       skip: options?.skip,
@@ -95,7 +96,6 @@ export class MongoRepository<TEntity extends IEntity<TKey>, TKey> {
     filter: FilterQuery<TEntity>,
     updates: Partial<TEntity>,
   ): Promise<boolean> {
-    const collection = this.getCollection();
     let documentFilter = {};
 
     if (filter.id) {
@@ -111,22 +111,18 @@ export class MongoRepository<TEntity extends IEntity<TKey>, TKey> {
 
     const flatUpdates = flattenObject(updates, { shouldReplaceArrays: true });
 
-    const operation = await collection.updateOne(documentFilter, {
+    const operation = await this.collection.updateOne(documentFilter, {
       $set: { ...flatUpdates },
     });
 
     return operation.result.ok === 1;
   }
 
-  public async getEntityCount(query: FilterQuery<TEntity>): Promise<number> {
-    const collection = this.getCollection();
-
-    return await collection.countDocuments(query);
+  public async count(query: FilterQuery<TEntity>): Promise<number> {
+    return await this.collection.countDocuments(query);
   }
 
   public async deleteOne(filter: FilterQuery<TEntity>): Promise<boolean> {
-    const collection = this.getCollection();
-
     let documentFilter = {};
 
     if (filter.id) {
@@ -140,12 +136,8 @@ export class MongoRepository<TEntity extends IEntity<TKey>, TKey> {
       documentFilter = filter;
     }
 
-    const operation = await collection.deleteOne(documentFilter);
+    const operation = await this.collection.deleteOne(documentFilter);
 
     return operation.result.ok === 1;
-  }
-
-  private getCollection(): Collection<IDocument<TEntity, TKey>> {
-    return this.database.collection(this.collection.name);
   }
 }
