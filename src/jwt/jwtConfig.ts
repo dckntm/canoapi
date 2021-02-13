@@ -1,4 +1,4 @@
-export interface IJWTConfig {
+export interface IJwtConfig {
   secretKey: string;
   issuer: string;
   validIssuer: string;
@@ -8,7 +8,7 @@ export interface IJWTConfig {
   expiresIn: string;
 }
 
-export const DefaultJWTConfig: IJWTConfig = {
+export const DefaultJWTConfig: IJwtConfig = {
   secretKey: 'Y2Fub2FwaV9rZXk=',
   issuer: 'canoapi',
   validIssuer: 'canoapi',

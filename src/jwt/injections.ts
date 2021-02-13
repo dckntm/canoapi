@@ -1,8 +1,8 @@
 import { injectAppConfig } from '../config';
 import { DefaultJWTConfig } from './jwtConfig';
-import { JWTService } from './jwtService';
+import { JwtService } from './jwtService';
 
-export const injectJWTConfig = () => {
+export const injectJwtConfig = () => {
   const config = injectAppConfig();
   const jwtConfig = DefaultJWTConfig;
 
@@ -11,4 +11,4 @@ export const injectJWTConfig = () => {
   return jwtConfig;
 };
 
-export const injectJWTService = (): JWTService => new JWTService();
+export const injectJwtService = (): JwtService => new JwtService();

@@ -1,11 +1,11 @@
 import { IHttpContext } from '..';
 import * as jwt from 'jsonwebtoken';
-import { injectJWTConfig } from '../../jwt/injections';
+import { injectJwtConfig } from '../../jwt/injections';
 import { Exception } from '../../exception';
 import { StatusCode } from '../../core';
 
 export const authorizeBearer = (context: IHttpContext) => {
-  const jwtConfig = injectJWTConfig();
+  const jwtConfig = injectJwtConfig();
   const headers = context.request.headers.authorization;
   const token = headers?.split('')[1];
 
