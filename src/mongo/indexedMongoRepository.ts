@@ -1,4 +1,4 @@
-import { IEntity } from '.';
+import { IEntity } from '../core';
 import { MongoRepository } from './mongoRepository';
 import { nextIndexedId } from './utils/nextIndexedId';
 

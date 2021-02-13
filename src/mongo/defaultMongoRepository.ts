@@ -1,5 +1,5 @@
 import { ObjectId } from 'mongodb';
-import { IEntity } from '.';
+import { IEntity } from '../core';
 import { MongoRepository } from './mongoRepository';
 
 export abstract class DefaultMongoRepository<
